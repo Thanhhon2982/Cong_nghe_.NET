@@ -50,7 +50,7 @@
             // button_sua
             // 
             this.button_sua.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_sua.Location = new System.Drawing.Point(443, 310);
+            this.button_sua.Location = new System.Drawing.Point(499, 310);
             this.button_sua.Name = "button_sua";
             this.button_sua.Size = new System.Drawing.Size(101, 42);
             this.button_sua.TabIndex = 6;
@@ -61,7 +61,7 @@
             // button_xoa
             // 
             this.button_xoa.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_xoa.Location = new System.Drawing.Point(298, 310);
+            this.button_xoa.Location = new System.Drawing.Point(342, 310);
             this.button_xoa.Name = "button_xoa";
             this.button_xoa.Size = new System.Drawing.Size(101, 42);
             this.button_xoa.TabIndex = 5;
@@ -98,7 +98,7 @@
             // button_them
             // 
             this.button_them.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_them.Location = new System.Drawing.Point(167, 310);
+            this.button_them.Location = new System.Drawing.Point(181, 310);
             this.button_them.Name = "button_them";
             this.button_them.Size = new System.Drawing.Size(101, 42);
             this.button_them.TabIndex = 4;
@@ -137,10 +137,10 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Times New Roman", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(276, 9);
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 36F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(255, 9);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(217, 46);
+            this.label4.Size = new System.Drawing.Size(325, 67);
             this.label4.TabIndex = 21;
             this.label4.Text = "Quản lí kho";
             // 

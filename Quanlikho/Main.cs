@@ -30,5 +30,10 @@ namespace Quanlikho
         {
             
         }
+
+        private void xemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

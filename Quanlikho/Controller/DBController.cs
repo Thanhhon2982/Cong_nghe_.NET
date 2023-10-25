@@ -32,8 +32,7 @@ namespace Quanlikho.Controller
                     String tenkho = reader["tenkho"].ToString();
                     String diachi = reader["diachi"].ToString();
                     Kho kho = new Kho(makho,tenkho,diachi);
-                    khoList.Add(kho);
-
+                    khoList.Add(kho);                 
                 }
             }
             catch (SqlException ex)
@@ -101,6 +100,6 @@ namespace Quanlikho.Controller
                 }
             }
         }
-        public bool delete(Kho kho) { return false; }
+        
     }
 }

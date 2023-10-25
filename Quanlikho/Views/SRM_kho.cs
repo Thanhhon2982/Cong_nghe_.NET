@@ -198,9 +198,7 @@ namespace Quanlikho
 
         private void button_clear_Click(object sender, EventArgs e)
         {
-            text_makho.Clear();
-            text_tenkho.Clear();
-            text_diachi.Clear();
+            clear();    
         }
 
         private void button2_Click(object sender, EventArgs e)
