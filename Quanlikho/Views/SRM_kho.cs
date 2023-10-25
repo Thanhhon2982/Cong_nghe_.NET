@@ -19,41 +19,47 @@ namespace Quanlikho
     public partial class SRM_kho : Form
     {
         
-        DBController controller;
-        List<Kho> dsKho;
-        Kho currentKho;
-        
+            DBController controller;
+            List<Kho> dsKho;
+            Kho currentKho;
+            List<Kho> dskho2;
 
         public SRM_kho()
         {
             InitializeComponent();
-            
+            dskho2 = new List<Kho>();
             controller = new DBController();
             dsKho = new List<Kho>();
             currentKho = new Kho();
+            DGV_Xem.ColumnCount = 3;
+            DGV_Xem.Columns[0].Name = "Mã kho";
+            DGV_Xem.Columns[1].Name = "Tên kho";
+            DGV_Xem.Columns[2].Name = "Địa chỉ";
         }
 
         private void button_them_Click(object sender, EventArgs e)
         {
-            //if ((string.IsNullOrEmpty(text_makho.Text)) || (string.IsNullOrEmpty(text_tenkho.Text)) || (string.IsNullOrEmpty(text_diachi.Text)))
-            //{
-            //    MessageBox.Show("Vui lòng điền đủ thông tin");
-            //}   
-            //else
-            //{
-            //    conn.Open();
-            //    SqlCommand cmd = new SqlCommand("insert into dskho values (N'"+text_makho.Text+"',N'"+text_tenkho.Text+"', N'"+text_diachi.Text+"') ", conn);
-            //    cmd.ExecuteNonQuery();
-            //    MessageBox.Show("Lưu thành công!","Thông báo",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            if (!string.IsNullOrWhiteSpace(text_makho.Text) && !string.IsNullOrWhiteSpace(text_tenkho.Text) && !string.IsNullOrWhiteSpace(text_diachi.Text))
+            {
+                string newMakho = text_makho.Text;
+                string newTenkho = text_tenkho.Text;
+                string newDiachi = text_diachi.Text;
 
-            //    text_makho.Clear();
-            //    text_tenkho.Clear();
-            //    text_diachi.Clear();
-            //    text_makho.Focus();
-            //    conn.Close();
-            //    button_load_Click(sender, e);
+
+                bool addedSuccessfully = controller.insert(newMakho, newTenkho, newDiachi);
+
+                if (addedSuccessfully)
+                {
+                    MessageBox.Show("Đã thêm thành công!");
+                    clear();
+                }
+                else
+                {
+                    MessageBox.Show("Lỗi!");
+                }
                 
-            //}
+            }
+            button_load_Click(sender, e);
         }
 
         private void lst_xem_SelectedIndexChanged(object sender, EventArgs e)
@@ -68,71 +74,116 @@ namespace Quanlikho
 
         private void button_xoa_Click(object sender, EventArgs e)
         {
-            //conn.Open();
-            //if (MessageBox.Show("Bạn có muốn xóa không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            //{
-            //    SqlCommand cmd = new SqlCommand("Delete from dskho where makho = '" + text_makho.Text + "' ", conn);
-            //    cmd.ExecuteNonQuery();
-            //    MessageBox.Show("Xóa thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //    text_makho.Clear();
-            //    text_tenkho.Clear();
-            //    text_diachi.Clear();
-            //    text_makho.Focus();
-            //}
-            //conn.Close();
-            //button_load_Click(sender, e);
-                
+            if (DGV_Xem.SelectedRows.Count > 0)
+            {
+                foreach (DataGridViewRow row in DGV_Xem.SelectedRows)
+                {
+                    string makhoToDelete = text_makho.Text;
+                    string tenkhoDelete = text_tenkho.Text;
+
+                    DialogResult result = MessageBox.Show("Bạn có muốn xóa kho " + tenkhoDelete + " với mã kho là " + makhoToDelete + " không?", "Xác nhận xóa", MessageBoxButtons.YesNo);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        bool deletedSuccessfully = controller.delete(makhoToDelete);
+
+                        if (deletedSuccessfully)
+                        {
+                            MessageBox.Show("Đã xóa đối tượng Kho!");
+                            clear();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Lỗi khi xóa đối tượng Kho!");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Hãy chọn đối tượng muốn xóa!");
+            }
+            button_load_Click(sender, e);
+
         }
 
         private void button_sua_Click(object sender, EventArgs e)
         {
-            //conn.Open();
-            //if (MessageBox.Show("Bạn có muốn sửa không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            //{
-            //    SqlCommand cmd = new SqlCommand("update dskho set tenkho = N'" + text_tenkho.Text + "', diachi = N'" + text_diachi.Text + "' where makho = '" + text_makho.Text + "' ", conn);
-            //    cmd.ExecuteNonQuery();
-            //    MessageBox.Show("Sửa thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //    text_makho.Clear();
-            //    text_tenkho.Clear();
-            //    text_diachi.Clear();
-            //    text_makho.Focus();
-            //}
-            //conn.Close();
-            //button_load_Click(sender, e);
-            
+            if (DGV_Xem.SelectedRows.Count > 0)
+            {
+                foreach (DataGridViewRow row in DGV_Xem.SelectedRows)
+                {
+                    string newMakho = text_makho.Text;
+                    string newTenkho = text_tenkho.Text;
+                    string newDiachi = text_diachi.Text;
+
+                    bool updatedSuccessfully = controller.update(newMakho, newTenkho, newDiachi);
+
+                    if (updatedSuccessfully)
+                    {
+                        MessageBox.Show("Đã cập nhật đối tượng Kho!");
+                        clear();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Lỗi khi cập nhật đối tượng Kho!");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Hãy chọn một đối tượng muốn sửa!");
+            }
+            button_load_Click(sender,e);
+
 
         }
        
         private void button_load_Click(object sender, EventArgs e)
         {
-           dsKho = controller.load();
-            
+            dsKho.Clear();
+            dsKho = controller.load();
+            DGV_Xem.Rows.Clear();
+
+            foreach (Kho k in dsKho)
+            {
+                String[] row = { k.getMakho(), k.getTenkho(), k.getDiachi() };
+                DGV_Xem.Rows.Add(row);
+            }
+
         }
 
- 
+        public void clear()
+        {
+            text_makho.Clear();
+            text_tenkho.Clear();
+            text_diachi.Clear();
+            txttim.Clear();
+        }
 
         private void lst_xem_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            text_makho.Text = lst_xem.SelectedItems[0].SubItems[0].Text;
-            text_tenkho.Text = lst_xem.SelectedItems[0].SubItems[1].Text;
-            text_diachi.Text = lst_xem.SelectedItems[0].SubItems[2].Text;
-
+           
+            
         }
 
         private void button_timkiem_Click(object sender, EventArgs e)
         {
-            //lst_xem.Items.Clear();
-            //conn.Open();
-            //SqlCommand cmd = new SqlCommand("select * from dskho where diachi like N'%" + txttim.Text + "%' or makho like N'%" + txttim.Text + "%' or tenkho like N'%" + txttim.Text + "%'", conn);
-            //SqlDataReader reader = cmd.ExecuteReader();
-            //while (reader.Read())
-            //{
-            //    ListViewItem lv = new ListViewItem(reader.GetString(0).ToString());
-            //    lv.SubItems.Add(reader.GetString(1));
-            //    lv.SubItems.Add(reader.GetString(2));
-            //    lst_xem.Items.Add(lv);
-            //}
-            //conn.Close();
+            string maKhoToSearch = txttim.Text;
+            if (!string.IsNullOrEmpty(maKhoToSearch))
+            {
+                dskho2 = dsKho.Where(k => k.getMakho() == maKhoToSearch).ToList();
+            }
+            else
+            {
+                dskho2 = dsKho;
+            }
+            DGV_Xem.Rows.Clear();
+            foreach (Kho kho in dskho2)
+            {
+                String[] row = { kho.getMakho(), kho.getTenkho(), kho.getDiachi() };
+                DGV_Xem.Rows.Add(row);
+            }
         }
 
         private void txttim_TextChanged(object sender, EventArgs e)
@@ -155,6 +206,24 @@ namespace Quanlikho
         private void button2_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void DGV_Xem_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (DGV_Xem.SelectedRows.Count == 0)
+            {
+                // Thông báo lỗi
+                MessageBox.Show("Vui lòng chọn một hàng trong DataGridView.");
+                return;
+            }
+
+            // Lấy đối tượng DataGridViewRow của hàng được chọn
+            DataGridViewRow row = DGV_Xem.SelectedRows[0];
+
+            // Lấy giá trị của các ô trong hàng được chọn
+            text_makho.Text = row.Cells[0].Value.ToString();
+            text_tenkho.Text = row.Cells[1].Value.ToString();
+            text_diachi.Text = row.Cells[2].Value.ToString();
         }
     }
 }

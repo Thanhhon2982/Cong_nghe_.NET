@@ -37,15 +37,14 @@
             this.text_makho = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.lst_xem = new System.Windows.Forms.ListView();
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label4 = new System.Windows.Forms.Label();
             this.button_load = new System.Windows.Forms.Button();
             this.button_timkiem = new System.Windows.Forms.Button();
             this.txttim = new System.Windows.Forms.TextBox();
             this.button_clear = new System.Windows.Forms.Button();
+            this.DGV_Xem = new System.Windows.Forms.DataGridView();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Xem)).BeginInit();
             this.SuspendLayout();
             // 
             // button_sua
@@ -135,38 +134,6 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "Mã kho:";
             // 
-            // lst_xem
-            // 
-            this.lst_xem.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader7});
-            this.lst_xem.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lst_xem.HideSelection = false;
-            this.lst_xem.Location = new System.Drawing.Point(81, 384);
-            this.lst_xem.Name = "lst_xem";
-            this.lst_xem.Size = new System.Drawing.Size(607, 227);
-            this.lst_xem.TabIndex = 20;
-            this.lst_xem.UseCompatibleStateImageBehavior = false;
-            this.lst_xem.View = System.Windows.Forms.View.Details;
-            this.lst_xem.SelectedIndexChanged += new System.EventHandler(this.lst_xem_SelectedIndexChanged);
-            this.lst_xem.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lst_xem_MouseDoubleClick);
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Mã kho";
-            this.columnHeader2.Width = 164;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Tên kho";
-            this.columnHeader3.Width = 149;
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "Địa chỉ";
-            this.columnHeader7.Width = 223;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -219,17 +186,29 @@
             this.button_clear.UseVisualStyleBackColor = true;
             this.button_clear.Click += new System.EventHandler(this.button_clear_Click);
             // 
+            // DGV_Xem
+            // 
+            this.DGV_Xem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV_Xem.Location = new System.Drawing.Point(12, 382);
+            this.DGV_Xem.Name = "DGV_Xem";
+            this.DGV_Xem.RowHeadersWidth = 51;
+            this.DGV_Xem.RowTemplate.Height = 24;
+            this.DGV_Xem.Size = new System.Drawing.Size(763, 264);
+            this.DGV_Xem.TabIndex = 28;
+            this.DGV_Xem.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Xem_CellContentClick);
+            this.DGV_Xem.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Xem_CellContentClick);
+            // 
             // SRM_kho
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(787, 658);
+            this.ClientSize = new System.Drawing.Size(845, 658);
+            this.Controls.Add(this.DGV_Xem);
             this.Controls.Add(this.button_clear);
             this.Controls.Add(this.txttim);
             this.Controls.Add(this.button_timkiem);
             this.Controls.Add(this.button_load);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.lst_xem);
             this.Controls.Add(this.button_sua);
             this.Controls.Add(this.button_xoa);
             this.Controls.Add(this.label3);
@@ -242,6 +221,7 @@
             this.Name = "SRM_kho";
             this.Text = "SRM_kho";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Xem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -258,15 +238,13 @@
         private System.Windows.Forms.TextBox text_makho;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListView lst_xem;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button_load;
         private System.Windows.Forms.Button button_timkiem;
         private System.Windows.Forms.TextBox txttim;
         private System.Windows.Forms.Button button_clear;
+        private System.Windows.Forms.DataGridView DGV_Xem;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
