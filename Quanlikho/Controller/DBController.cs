@@ -54,34 +54,34 @@ namespace Quanlikho.Controller
             return null;
         }
 
-        public bool insert(string makho, string tenkho, string diachi) {
+        public bool insert(Kho kho) {
 
-            Kho newKho = new Kho(makho, tenkho, diachi);
-            khoList.Add(newKho);
+            Kho newkho = new Kho();
+            khoList.Add(newkho);
             using (SqlConnection conn = DatabaseHelper.getConnection())
             {
                 conn.Open();
                 string query = "INSERT INTO dskho (makho, tenkho, diachi) VALUES (@makho, @tenkho, @diachi)";
                 using (SqlCommand command = new SqlCommand(query, conn))
                 {
-                    command.Parameters.AddWithValue("@makho", makho);
-                    command.Parameters.AddWithValue("@tenkho", tenkho);
-                    command.Parameters.AddWithValue("@diachi", diachi);
+                    command.Parameters.AddWithValue("@makho", kho.getMakho());
+                    command.Parameters.AddWithValue("@tenkho", kho.getTenkho());
+                    command.Parameters.AddWithValue("@diachi", kho.getDiachi());
                     int rowsAffected = command.ExecuteNonQuery();
                     return rowsAffected > 0;
                 }
             }
         }
-        public bool update(string makho, string tenkho, string diachi) {
+        public bool update(Kho kho) {
             using (SqlConnection conn = DatabaseHelper.getConnection())
             {
                 conn.Open();
                 string query = "UPDATE dskho SET tenkho = @tenkho, diachi = @diachi WHERE makho = @makho";
                 using (SqlCommand command = new SqlCommand(query, conn))
                 {
-                    command.Parameters.AddWithValue("@tenkho", tenkho);
-                    command.Parameters.AddWithValue("@diachi", diachi);
-                    command.Parameters.AddWithValue("@makho", makho);
+                    command.Parameters.AddWithValue("@tenkho", kho.getTenkho());
+                    command.Parameters.AddWithValue("@diachi", kho.getDiachi());
+                    command.Parameters.AddWithValue("@makho", kho.getMakho());
                     int rowsAffected = command.ExecuteNonQuery();
                     return rowsAffected > 0;
                 }

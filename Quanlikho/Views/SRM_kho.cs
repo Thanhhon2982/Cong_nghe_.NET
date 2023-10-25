@@ -41,12 +41,10 @@ namespace Quanlikho
         {
             if (!string.IsNullOrWhiteSpace(text_makho.Text) && !string.IsNullOrWhiteSpace(text_tenkho.Text) && !string.IsNullOrWhiteSpace(text_diachi.Text))
             {
-                string newMakho = text_makho.Text;
-                string newTenkho = text_tenkho.Text;
-                string newDiachi = text_diachi.Text;
+                currentKho = new Kho(text_makho.Text,text_tenkho.Text,text_diachi.Text);
 
 
-                bool addedSuccessfully = controller.insert(newMakho, newTenkho, newDiachi);
+                bool addedSuccessfully = controller.insert(currentKho);
 
                 if (addedSuccessfully)
                 {
@@ -62,15 +60,7 @@ namespace Quanlikho
             button_load_Click(sender, e);
         }
 
-        private void lst_xem_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void button_xoa_Click(object sender, EventArgs e)
         {
@@ -78,14 +68,13 @@ namespace Quanlikho
             {
                 foreach (DataGridViewRow row in DGV_Xem.SelectedRows)
                 {
-                    string makhoToDelete = text_makho.Text;
-                    string tenkhoDelete = text_tenkho.Text;
+                    currentKho = new Kho(text_makho.Text, text_tenkho.Text, text_diachi.Text);
 
-                    DialogResult result = MessageBox.Show("Bạn có muốn xóa kho " + tenkhoDelete + " với mã kho là " + makhoToDelete + " không?", "Xác nhận xóa", MessageBoxButtons.YesNo);
+                    DialogResult result = MessageBox.Show("Bạn có muốn xóa kho " + text_tenkho.Text + " với mã kho là " + text_makho.Text + " không?", "Xác nhận xóa", MessageBoxButtons.YesNo);
 
                     if (result == DialogResult.Yes)
                     {
-                        bool deletedSuccessfully = controller.delete(makhoToDelete);
+                        bool deletedSuccessfully = controller.delete(text_makho.Text);
 
                         if (deletedSuccessfully)
                         {
@@ -113,11 +102,9 @@ namespace Quanlikho
             {
                 foreach (DataGridViewRow row in DGV_Xem.SelectedRows)
                 {
-                    string newMakho = text_makho.Text;
-                    string newTenkho = text_tenkho.Text;
-                    string newDiachi = text_diachi.Text;
+                    currentKho = new Kho(text_makho.Text, text_tenkho.Text, text_diachi.Text);
 
-                    bool updatedSuccessfully = controller.update(newMakho, newTenkho, newDiachi);
+                    bool updatedSuccessfully = controller.update(currentKho);
 
                     if (updatedSuccessfully)
                     {
@@ -146,6 +133,7 @@ namespace Quanlikho
             DGV_Xem.Rows.Clear();
 
             foreach (Kho k in dsKho)
+
             {
                 String[] row = { k.getMakho(), k.getTenkho(), k.getDiachi() };
                 DGV_Xem.Rows.Add(row);
@@ -159,12 +147,6 @@ namespace Quanlikho
             text_tenkho.Clear();
             text_diachi.Clear();
             txttim.Clear();
-        }
-
-        private void lst_xem_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-           
-            
         }
 
         private void button_timkiem_Click(object sender, EventArgs e)
@@ -184,16 +166,6 @@ namespace Quanlikho
                 String[] row = { kho.getMakho(), kho.getTenkho(), kho.getDiachi() };
                 DGV_Xem.Rows.Add(row);
             }
-        }
-
-        private void txttim_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void button_clear_Click(object sender, EventArgs e)
@@ -223,5 +195,6 @@ namespace Quanlikho
             text_tenkho.Text = row.Cells[1].Value.ToString();
             text_diachi.Text = row.Cells[2].Value.ToString();
         }
+
     }
 }
