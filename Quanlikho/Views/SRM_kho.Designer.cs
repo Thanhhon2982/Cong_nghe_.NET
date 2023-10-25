@@ -44,6 +44,7 @@
             this.button_clear = new System.Windows.Forms.Button();
             this.DGV_Xem = new System.Windows.Forms.DataGridView();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.button_close = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Xem)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,7 +52,7 @@
             // 
             this.button_sua.BackColor = System.Drawing.Color.Cyan;
             this.button_sua.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_sua.Location = new System.Drawing.Point(380, 593);
+            this.button_sua.Location = new System.Drawing.Point(309, 593);
             this.button_sua.Name = "button_sua";
             this.button_sua.Size = new System.Drawing.Size(101, 42);
             this.button_sua.TabIndex = 6;
@@ -63,7 +64,7 @@
             // 
             this.button_xoa.BackColor = System.Drawing.Color.Cyan;
             this.button_xoa.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_xoa.Location = new System.Drawing.Point(223, 593);
+            this.button_xoa.Location = new System.Drawing.Point(170, 593);
             this.button_xoa.Name = "button_xoa";
             this.button_xoa.Size = new System.Drawing.Size(101, 42);
             this.button_xoa.TabIndex = 5;
@@ -101,7 +102,7 @@
             // 
             this.button_them.BackColor = System.Drawing.Color.Cyan;
             this.button_them.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_them.Location = new System.Drawing.Point(62, 593);
+            this.button_them.Location = new System.Drawing.Point(29, 593);
             this.button_them.Name = "button_them";
             this.button_them.Size = new System.Drawing.Size(101, 42);
             this.button_them.TabIndex = 4;
@@ -152,7 +153,7 @@
             // 
             this.button_load.BackColor = System.Drawing.Color.Cyan;
             this.button_load.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_load.Location = new System.Drawing.Point(660, 593);
+            this.button_load.Location = new System.Drawing.Point(585, 593);
             this.button_load.Name = "button_load";
             this.button_load.Size = new System.Drawing.Size(101, 42);
             this.button_load.TabIndex = 23;
@@ -184,7 +185,7 @@
             // 
             this.button_clear.BackColor = System.Drawing.Color.Cyan;
             this.button_clear.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_clear.Location = new System.Drawing.Point(519, 593);
+            this.button_clear.Location = new System.Drawing.Point(451, 593);
             this.button_clear.Name = "button_clear";
             this.button_clear.Size = new System.Drawing.Size(101, 42);
             this.button_clear.TabIndex = 27;
@@ -204,12 +205,25 @@
             this.DGV_Xem.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Xem_CellContentClick);
             this.DGV_Xem.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Xem_CellContentClick);
             // 
+            // button_close
+            // 
+            this.button_close.BackColor = System.Drawing.Color.Cyan;
+            this.button_close.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_close.Location = new System.Drawing.Point(724, 593);
+            this.button_close.Name = "button_close";
+            this.button_close.Size = new System.Drawing.Size(101, 42);
+            this.button_close.TabIndex = 29;
+            this.button_close.Text = "Close";
+            this.button_close.UseVisualStyleBackColor = false;
+            this.button_close.Click += new System.EventHandler(this.button_close_Click);
+            // 
             // SRM_kho
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(853, 730);
+            this.Controls.Add(this.button_close);
             this.Controls.Add(this.DGV_Xem);
             this.Controls.Add(this.button_clear);
             this.Controls.Add(this.txttim);
@@ -251,6 +265,7 @@
         private System.Windows.Forms.Button button_clear;
         private System.Windows.Forms.DataGridView DGV_Xem;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button button_close;
     }
 }
 

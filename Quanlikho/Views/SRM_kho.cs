@@ -61,14 +61,12 @@ namespace Quanlikho
         }
 
 
-
         private void button_xoa_Click(object sender, EventArgs e)
         {
             if (DGV_Xem.SelectedRows.Count > 0)
             {
                 foreach (DataGridViewRow row in DGV_Xem.SelectedRows)
-                {
-                    currentKho = new Kho(text_makho.Text, text_tenkho.Text, text_diachi.Text);
+                {  
 
                     DialogResult result = MessageBox.Show("Bạn có muốn xóa kho " + text_tenkho.Text + " với mã kho là " + text_makho.Text + " không?", "Xác nhận xóa", MessageBoxButtons.YesNo);
 
@@ -78,12 +76,12 @@ namespace Quanlikho
 
                         if (deletedSuccessfully)
                         {
-                            MessageBox.Show("Đã xóa đối tượng Kho!");
+                            MessageBox.Show("Đã xóa !!");
                             clear();
                         }
                         else
                         {
-                            MessageBox.Show("Lỗi khi xóa đối tượng Kho!");
+                            MessageBox.Show("Lỗi !");
                         }
                     }
                 }
@@ -108,18 +106,18 @@ namespace Quanlikho
 
                     if (updatedSuccessfully)
                     {
-                        MessageBox.Show("Đã cập nhật đối tượng Kho!");
+                        MessageBox.Show("Đã sửa thành công!");
                         clear();
                     }
                     else
                     {
-                        MessageBox.Show("Lỗi khi cập nhật đối tượng Kho!");
+                        MessageBox.Show("Lỗi!");
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Hãy chọn một đối tượng muốn sửa!");
+                MessageBox.Show("Hãy đối tượng muốn sửa!");
             }
             button_load_Click(sender,e);
 
@@ -173,11 +171,6 @@ namespace Quanlikho
             clear();    
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void DGV_Xem_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (DGV_Xem.SelectedRows.Count == 0)
@@ -196,5 +189,16 @@ namespace Quanlikho
             text_diachi.Text = row.Cells[2].Value.ToString();
         }
 
+        private void button_close_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn có muốn thoát không?", "Xác nhận thoát", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes) 
+            {
+                this.Hide();
+                Main main = new Main();
+                main.ShowDialog();
+            }
+            
+        }
     }
 }
