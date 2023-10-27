@@ -63,12 +63,9 @@ namespace Quanlikho
 
         private void button_xoa_Click(object sender, EventArgs e)
         {
-            if (DGV_Xem.SelectedRows.Count > 0)
-            {
-                foreach (DataGridViewRow row in DGV_Xem.SelectedRows)
-                {
+            
                     currentKho = new Kho(text_makho.Text, text_tenkho.Text, text_diachi.Text);
-                    DialogResult result = MessageBox.Show("Bạn có muốn xóa kho " + text_tenkho.Text + " với mã kho là " + text_makho.Text + " không?", "Xác nhận xóa", MessageBoxButtons.YesNo);
+                    DialogResult result = MessageBox.Show("Bạn có muốn xóa không?", "Xác nhận xóa", MessageBoxButtons.YesNo);
 
                     if (result == DialogResult.Yes)
                     {
@@ -84,12 +81,7 @@ namespace Quanlikho
                             MessageBox.Show("Lỗi !");
                         }
                     }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Hãy chọn đối tượng muốn xóa!");
-            }
+                
             button_load_Click(sender, e);
 
         }
@@ -102,16 +94,20 @@ namespace Quanlikho
                 {
                     currentKho = new Kho(text_makho.Text, text_tenkho.Text, text_diachi.Text);
 
-                    bool updatedSuccessfully = controller.update(currentKho);
+                    DialogResult result = MessageBox.Show("Bạn có muốn sửa không!", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        bool updatedSuccessfully = controller.update(currentKho);
 
-                    if (updatedSuccessfully)
-                    {
-                        MessageBox.Show("Đã sửa thành công!");
-                        clear();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Lỗi!");
+                        if (updatedSuccessfully)
+                        {
+                            MessageBox.Show("Đã sửa thành công!");
+                            clear();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Lỗi!");
+                        }
                     }
                 }
             }
