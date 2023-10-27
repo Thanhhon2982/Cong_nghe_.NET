@@ -102,13 +102,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Resources\" />
     <Folder Include="sql scripts\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\anh-nen-4k-cho-desktop_105907396.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\banner.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

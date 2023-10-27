@@ -204,6 +204,7 @@
             this.DGV_Xem.TabIndex = 28;
             this.DGV_Xem.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Xem_CellContentClick);
             this.DGV_Xem.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Xem_CellContentClick);
+            this.DGV_Xem.Click += new System.EventHandler(this.DGV_Xem_Click);
             // 
             // button_close
             // 
@@ -241,6 +242,7 @@
             this.Controls.Add(this.label1);
             this.Name = "SRM_kho";
             this.Text = "SRM_kho";
+            this.Load += new System.EventHandler(this.SRM_kho_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Xem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

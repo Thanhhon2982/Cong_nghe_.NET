@@ -66,13 +66,13 @@ namespace Quanlikho
             if (DGV_Xem.SelectedRows.Count > 0)
             {
                 foreach (DataGridViewRow row in DGV_Xem.SelectedRows)
-                {  
-
+                {
+                    currentKho = new Kho(text_makho.Text, text_tenkho.Text, text_diachi.Text);
                     DialogResult result = MessageBox.Show("Bạn có muốn xóa kho " + text_tenkho.Text + " với mã kho là " + text_makho.Text + " không?", "Xác nhận xóa", MessageBoxButtons.YesNo);
 
                     if (result == DialogResult.Yes)
                     {
-                        bool deletedSuccessfully = controller.delete(text_makho.Text);
+                        bool deletedSuccessfully = controller.delete(currentKho);
 
                         if (deletedSuccessfully)
                         {
@@ -94,7 +94,7 @@ namespace Quanlikho
 
         }
 
-        private void button_sua_Click(object sender, EventArgs e)
+        private void button_sua_Click(object sender, EventArgs e) // sửa dữ liệu
         {
             if (DGV_Xem.SelectedRows.Count > 0)
             {
@@ -124,7 +124,7 @@ namespace Quanlikho
 
         }
        
-        private void button_load_Click(object sender, EventArgs e)
+        private void button_load_Click(object sender, EventArgs e)// load dữ liệu lên bảng
         {
             dsKho.Clear();
             dsKho = controller.load();
@@ -139,7 +139,7 @@ namespace Quanlikho
 
         }
 
-        public void clear()
+        public void clear() //Xóa trắng ở text box
         {
             text_makho.Clear();
             text_tenkho.Clear();
@@ -149,19 +149,21 @@ namespace Quanlikho
 
         private void button_timkiem_Click(object sender, EventArgs e)
         {
-            string maKhoToSearch = txttim.Text;
-            if (!string.IsNullOrEmpty(maKhoToSearch))
+            if (txttim.Text == "")
             {
-                dskho2 = dsKho.Where(k => k.getMakho() == maKhoToSearch).ToList();
+                // Hiển thị một thông báo lỗi.
+                MessageBox.Show("Vui lòng nhập từ khóa tìm kiếm.");
+                return;
             }
-            else
-            {
-                dskho2 = dsKho;
-            }
+
+            // Thực hiện các bước tìm kiếm.
+            dsKho.Clear();
+            dsKho = controller.search(txttim.Text);
             DGV_Xem.Rows.Clear();
-            foreach (Kho kho in dskho2)
+
+            foreach (Kho k in dsKho)
             {
-                String[] row = { kho.getMakho(), kho.getTenkho(), kho.getDiachi() };
+                String[] row = { k.getMakho(), k.getTenkho(), k.getDiachi() };
                 DGV_Xem.Rows.Add(row);
             }
         }
@@ -172,6 +174,23 @@ namespace Quanlikho
         }
 
         private void DGV_Xem_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void button_close_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn có muốn thoát không?", "Xác nhận thoát", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes) 
+            {
+                this.Hide();
+                Main main = new Main();
+                main.ShowDialog();
+            }
+            
+        }
+
+        private void DGV_Xem_Click(object sender, EventArgs e)
         {
             if (DGV_Xem.SelectedRows.Count == 0)
             {
@@ -189,16 +208,9 @@ namespace Quanlikho
             text_diachi.Text = row.Cells[2].Value.ToString();
         }
 
-        private void button_close_Click(object sender, EventArgs e)
+        private void SRM_kho_Load(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Bạn có muốn thoát không?", "Xác nhận thoát", MessageBoxButtons.YesNo);
-            if (result == DialogResult.Yes) 
-            {
-                this.Hide();
-                Main main = new Main();
-                main.ShowDialog();
-            }
-            
+
         }
     }
 }

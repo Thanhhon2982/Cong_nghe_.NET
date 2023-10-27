@@ -56,50 +56,132 @@ namespace Quanlikho.Controller
 
         public bool insert(Kho kho) {
 
-            Kho newkho = new Kho();
-            khoList.Add(newkho);
-            using (SqlConnection conn = DatabaseHelper.getConnection())
+            SqlConnection conn = DatabaseHelper.getConnection();
+            try
             {
                 conn.Open();
-                string query = "INSERT INTO dskho (makho, tenkho, diachi) VALUES (@makho, @tenkho, @diachi)";
-                using (SqlCommand command = new SqlCommand(query, conn))
-                {
-                    command.Parameters.AddWithValue("@makho", kho.getMakho());
-                    command.Parameters.AddWithValue("@tenkho", kho.getTenkho());
-                    command.Parameters.AddWithValue("@diachi", kho.getDiachi());
-                    int rowsAffected = command.ExecuteNonQuery();
-                    return rowsAffected > 0;
-                }
+                SqlCommand command = new SqlCommand("INSERT INTO dskho  VALUES (@maKho, @tenKho, @diaChi)", conn);
+                command.Parameters.AddWithValue("@maKho", kho.getMakho());
+                command.Parameters.AddWithValue("@tenKho", kho.getTenkho());
+                command.Parameters.AddWithValue("@diaChi", kho.getDiachi());
+                command.ExecuteNonQuery();
+                return true;
+
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return false;
         }
         public bool update(Kho kho) {
-            using (SqlConnection conn = DatabaseHelper.getConnection())
+            if (kho != null && !string.IsNullOrEmpty(kho.getMakho()) && !string.IsNullOrEmpty(kho.getTenkho()) && !string.IsNullOrEmpty(kho.getDiachi()))
             {
-                conn.Open();
-                string query = "UPDATE dskho SET tenkho = @tenkho, diachi = @diachi WHERE makho = @makho";
-                using (SqlCommand command = new SqlCommand(query, conn))
+                // Update the kho in the database.
+                SqlConnection conn = DatabaseHelper.getConnection();
+                try
                 {
-                    command.Parameters.AddWithValue("@tenkho", kho.getTenkho());
-                    command.Parameters.AddWithValue("@diachi", kho.getDiachi());
-                    command.Parameters.AddWithValue("@makho", kho.getMakho());
-                    int rowsAffected = command.ExecuteNonQuery();
-                    return rowsAffected > 0;
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("update dskho set tenkho = @tenKho, diachi = @diaChi where makho = @maKho", conn);
+                    cmd.Parameters.AddWithValue("@tenKho", kho.getTenkho());
+                    cmd.Parameters.AddWithValue("@diaChi", kho.getDiachi());
+                    cmd.Parameters.AddWithValue("@maKho", kho.getMakho());
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (SqlException ex)
+                {
+                    // Log the exception and handle it appropriately.
+                    Console.WriteLine(ex.Message);
                 }
             }
-        }
-        public bool delete(String makho) {
-            using (SqlConnection conn = DatabaseHelper.getConnection())
-            {
-                conn.Open();
-                string query = "DELETE FROM dskho WHERE makho = @makho";
-                using (SqlCommand command = new SqlCommand(query, conn))
-                {
-                    command.Parameters.AddWithValue("@makho", makho);
-                    int rowsAffected = command.ExecuteNonQuery();
-                    return rowsAffected > 0;
-                }
-            }
+            return false;
         }
         
+        public bool delete(Kho kho) {
+            SqlConnection conn = DatabaseHelper.getConnection();
+            try
+            {
+                conn.Open();
+                SqlCommand command = new SqlCommand("delete from dskho where makho = @maKho", conn);
+                command.Parameters.AddWithValue("@maKho", kho.getMakho());
+                command.ExecuteNonQuery();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return false;
+        }
+        public bool delete(String makho)
+        {
+            if (!string.IsNullOrEmpty(makho))
+            {
+                // Delete the kho from the list.
+                khoList.Remove(khoList.FirstOrDefault(k => k.getMakho() == makho));
+
+                // Delete the kho from the database.
+                SqlConnection conn = DatabaseHelper.getConnection();
+                try
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("delete from dskho where makho = @makho", conn);
+                    cmd.Parameters.AddWithValue("@makho", makho);
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (SqlException ex)
+                {
+                    // Log the exception and handle it appropriately.
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            return false;
+        }
+        public List<Kho> search(String keyword)
+        {
+            if (string.IsNullOrEmpty(keyword))
+            {
+                return khoList;
+            }
+
+            // Create a list to store the results.
+            List<Kho> results = new List<Kho>();
+
+            SqlConnection conn = DatabaseHelper.getConnection();
+            try
+            {
+                conn.Open();
+
+                SqlCommand command = new SqlCommand("SELECT * FROM dskho where makho = @makho", conn);
+                command.Parameters.AddWithValue("@makho", keyword);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    String makho = reader["makho"].ToString();
+                    String tenkho = reader["tenkho"].ToString();
+                    String diachi = reader["diachi"].ToString();
+                    Kho kho = new Kho(makho,tenkho,diachi);
+                    results.Add(kho);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return results;
+        }
+        public bool isExit(Kho kho)
+        {
+            return false;
+        }
+        public bool isExit(String id)
+        {
+            return false;
+        }
+
     }
 }
