@@ -23,6 +23,7 @@ namespace Quanlikho.Controller
             SqlConnection conn = DatabaseHelper.getConnection();
             try
             {
+                // Mở kết nối
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("select * from dskho", conn);
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -39,7 +40,11 @@ namespace Quanlikho.Controller
             {
                 Console.WriteLine(ex.Message);
             }
-            finally { conn.Close(); }
+            finally
+            {
+                // Đóng kết nối
+                conn.Close();
+            }
             return khoList;
         }
         public Kho get(string Makho) {
@@ -72,6 +77,11 @@ namespace Quanlikho.Controller
             {
                 MessageBox.Show(ex.Message);
             }
+            finally
+            {
+                // Đóng kết nối
+                conn.Close();
+            }
             return false;
         }
         public bool update(Kho kho) {
@@ -94,6 +104,11 @@ namespace Quanlikho.Controller
                     // Log the exception and handle it appropriately.
                     Console.WriteLine(ex.Message);
                 }
+                finally
+                {
+                    // Đóng kết nối
+                    conn.Close();
+                }
             }
             return false;
         }
@@ -113,7 +128,11 @@ namespace Quanlikho.Controller
             {
                 MessageBox.Show(ex.Message);
             }
-
+            finally
+            {
+                // Đóng kết nối
+                conn.Close();
+            }
             return false;
         }
         public bool delete(String makho)
@@ -137,6 +156,11 @@ namespace Quanlikho.Controller
                 {
                     // Log the exception and handle it appropriately.
                     Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    // Đóng kết nối
+                    conn.Close();
                 }
             }
             return false;
@@ -172,15 +196,90 @@ namespace Quanlikho.Controller
             {
                 MessageBox.Show(ex.Message);
             }
+            finally
+            {
+                // Đóng kết nối
+                conn.Close();
+            }
             return results;
         }
-        public bool isExit(Kho kho)
+        public bool isExist(string id)
         {
-            return false;
+            // Create a connection to the database
+            SqlConnection conn = DatabaseHelper.getConnection();
+            try
+            {
+                // Open the connection
+                conn.Open();
+
+                // Create a command to check if the id exists in the QLKho table
+                SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM dskho WHERE makho = @makho", conn);
+                // Add a parameter for the id
+                command.Parameters.AddWithValue("@makho", id);
+                // Execute the command and get the result
+                int count = (int)command.ExecuteScalar();
+                // If the count is greater than zero, the id exists
+                if (count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            finally
+            {
+                // Close the connection
+                conn.Close();
+            }
         }
-        public bool isExit(String id)
+        public bool isExist(Kho kho)
         {
-            return false;
+            // Kiểm tra xem đối tượng Kho có hợp lệ hay không
+            if (kho == null || string.IsNullOrEmpty(kho.getMakho()))
+            {
+                return false;
+            }
+
+            // Tạo một kết nối đến cơ sở dữ liệu
+            SqlConnection conn = DatabaseHelper.getConnection();
+            try
+            {
+                // Mở kết nối
+                conn.Open();
+                // Tạo một lệnh để kiểm tra xem mã kho của đối tượng Kho có tồn tại trong bảng QLKho hay không
+                SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM dskho WHERE makho = @maKho", conn);
+                // Thêm một tham số cho mã kho
+                command.Parameters.AddWithValue("@maKho", kho.getMakho());
+                // Thực thi lệnh và lấy kết quả
+                int count = (int)command.ExecuteScalar();
+                // Nếu số lượng lớn hơn không, tức là mã kho tồn tại
+                if (count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            finally
+            {
+                // Đóng kết nối
+                conn.Close();
+            }
         }
 
     }

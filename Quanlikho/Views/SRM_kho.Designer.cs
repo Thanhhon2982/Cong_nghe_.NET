@@ -38,13 +38,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.button_load = new System.Windows.Forms.Button();
             this.button_timkiem = new System.Windows.Forms.Button();
             this.txttim = new System.Windows.Forms.TextBox();
             this.button_clear = new System.Windows.Forms.Button();
             this.DGV_Xem = new System.Windows.Forms.DataGridView();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.button_close = new System.Windows.Forms.Button();
+            this.button_test = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Xem)).BeginInit();
             this.SuspendLayout();
             // 
@@ -149,18 +148,6 @@
             this.label4.TabIndex = 21;
             this.label4.Text = "Quản lí kho";
             // 
-            // button_load
-            // 
-            this.button_load.BackColor = System.Drawing.Color.Cyan;
-            this.button_load.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_load.Location = new System.Drawing.Point(585, 593);
-            this.button_load.Name = "button_load";
-            this.button_load.Size = new System.Drawing.Size(101, 42);
-            this.button_load.TabIndex = 23;
-            this.button_load.Text = "Load";
-            this.button_load.UseVisualStyleBackColor = false;
-            this.button_load.Click += new System.EventHandler(this.button_load_Click);
-            // 
             // button_timkiem
             // 
             this.button_timkiem.BackColor = System.Drawing.Color.Cyan;
@@ -202,15 +189,13 @@
             this.DGV_Xem.RowTemplate.Height = 24;
             this.DGV_Xem.Size = new System.Drawing.Size(763, 264);
             this.DGV_Xem.TabIndex = 28;
-            this.DGV_Xem.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Xem_CellContentClick);
-            this.DGV_Xem.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Xem_CellContentClick);
             this.DGV_Xem.Click += new System.EventHandler(this.DGV_Xem_Click);
             // 
             // button_close
             // 
             this.button_close.BackColor = System.Drawing.Color.Cyan;
             this.button_close.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_close.Location = new System.Drawing.Point(724, 593);
+            this.button_close.Location = new System.Drawing.Point(594, 593);
             this.button_close.Name = "button_close";
             this.button_close.Size = new System.Drawing.Size(101, 42);
             this.button_close.TabIndex = 29;
@@ -218,18 +203,30 @@
             this.button_close.UseVisualStyleBackColor = false;
             this.button_close.Click += new System.EventHandler(this.button_close_Click);
             // 
+            // button_test
+            // 
+            this.button_test.BackColor = System.Drawing.Color.Cyan;
+            this.button_test.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_test.Location = new System.Drawing.Point(594, 149);
+            this.button_test.Name = "button_test";
+            this.button_test.Size = new System.Drawing.Size(121, 42);
+            this.button_test.TabIndex = 30;
+            this.button_test.Text = "Test";
+            this.button_test.UseVisualStyleBackColor = false;
+            this.button_test.Click += new System.EventHandler(this.button_test_Click);
+            // 
             // SRM_kho
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(853, 730);
+            this.ClientSize = new System.Drawing.Size(841, 686);
+            this.Controls.Add(this.button_test);
             this.Controls.Add(this.button_close);
             this.Controls.Add(this.DGV_Xem);
             this.Controls.Add(this.button_clear);
             this.Controls.Add(this.txttim);
             this.Controls.Add(this.button_timkiem);
-            this.Controls.Add(this.button_load);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.button_sua);
             this.Controls.Add(this.button_xoa);
@@ -261,13 +258,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button_load;
         private System.Windows.Forms.Button button_timkiem;
         private System.Windows.Forms.TextBox txttim;
         private System.Windows.Forms.Button button_clear;
         private System.Windows.Forms.DataGridView DGV_Xem;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button button_close;
+        private System.Windows.Forms.Button button_test;
     }
 }
 

@@ -20,8 +20,8 @@ namespace Quanlikho.Model
         }
         
         public string getMakho() { return makho; }
-        public String getTenkho() {  return tenkho; }
-        public String getDiachi() {  return diachi; }
+        public string getTenkho() {  return tenkho; }
+        public string getDiachi() {  return diachi; }
 
         public void setMakho(string makho) {  this.makho = makho; }
         public void setTenkho(string tenkho) { this.tenkho = tenkho;}

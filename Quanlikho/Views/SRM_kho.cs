@@ -22,12 +22,10 @@ namespace Quanlikho
             DBController controller;
             List<Kho> dsKho;
             Kho currentKho;
-            List<Kho> dskho2;
 
         public SRM_kho()
         {
             InitializeComponent();
-            dskho2 = new List<Kho>();
             controller = new DBController();
             dsKho = new List<Kho>();
             currentKho = new Kho();
@@ -36,34 +34,53 @@ namespace Quanlikho
             DGV_Xem.Columns[1].Name = "Tên kho";
             DGV_Xem.Columns[2].Name = "Địa chỉ";
         }
+        private void loadData()
+        {
+            dsKho.Clear();
+            dsKho = controller.load();
+            DGV_Xem.Rows.Clear();
 
+            foreach (Kho k in dsKho)
+
+            {
+                String[] row = { k.getMakho(), k.getTenkho(), k.getDiachi() };
+                DGV_Xem.Rows.Add(row);
+            }
+        }
         private void button_them_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(text_makho.Text) && !string.IsNullOrWhiteSpace(text_tenkho.Text) && !string.IsNullOrWhiteSpace(text_diachi.Text))
             {
                 currentKho = new Kho(text_makho.Text,text_tenkho.Text,text_diachi.Text);
 
+                bool testSuccessfully = controller.isExist(currentKho);
 
-                bool addedSuccessfully = controller.insert(currentKho);
-
-                if (addedSuccessfully)
+                if (testSuccessfully)
                 {
-                    MessageBox.Show("Đã thêm thành công!");
-                    clear();
+                    MessageBox.Show("Đã có dữ liệu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    MessageBox.Show("Lỗi!");
+                      bool addedSuccessfully = controller.insert(currentKho);
+
+                    if (addedSuccessfully)
+                    {
+                        MessageBox.Show("Đã thêm thành công!");
+                        clear();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Lỗi!");
+                    }
                 }
                 
             }
-            button_load_Click(sender, e);
+          
         }
 
 
         private void button_xoa_Click(object sender, EventArgs e)
         {
-            
                     currentKho = new Kho(text_makho.Text, text_tenkho.Text, text_diachi.Text);
                     DialogResult result = MessageBox.Show("Bạn có muốn xóa không?", "Xác nhận xóa", MessageBoxButtons.YesNo);
 
@@ -82,18 +99,13 @@ namespace Quanlikho
                         }
                     }
                 
-            button_load_Click(sender, e);
+            
 
         }
 
         private void button_sua_Click(object sender, EventArgs e) // sửa dữ liệu
         {
-            if (DGV_Xem.SelectedRows.Count > 0)
-            {
-                foreach (DataGridViewRow row in DGV_Xem.SelectedRows)
-                {
                     currentKho = new Kho(text_makho.Text, text_tenkho.Text, text_diachi.Text);
-
                     DialogResult result = MessageBox.Show("Bạn có muốn sửa không!", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result == DialogResult.Yes)
                     {
@@ -108,14 +120,8 @@ namespace Quanlikho
                         {
                             MessageBox.Show("Lỗi!");
                         }
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Hãy đối tượng muốn sửa!");
-            }
-            button_load_Click(sender,e);
+                   }
+                     button_load_Click(sender,e);
 
 
         }
@@ -191,7 +197,7 @@ namespace Quanlikho
             if (DGV_Xem.SelectedRows.Count == 0)
             {
                 // Thông báo lỗi
-                MessageBox.Show("Vui lòng chọn một hàng trong DataGridView.");
+                MessageBox.Show("Vui lòng chọn một hàng trong DataGridView");
                 return;
             }
 
@@ -202,11 +208,19 @@ namespace Quanlikho
             text_makho.Text = row.Cells[0].Value.ToString();
             text_tenkho.Text = row.Cells[1].Value.ToString();
             text_diachi.Text = row.Cells[2].Value.ToString();
+
         }
 
         private void SRM_kho_Load(object sender, EventArgs e)
         {
-
+            loadData();
         }
+
+        private void button_test_Click(object sender, EventArgs e)
+        {
+            currentKho = new Kho(text_makho.Text,text_tenkho.Text,text_diachi.Text);
+            
+        }
+
     }
 }
