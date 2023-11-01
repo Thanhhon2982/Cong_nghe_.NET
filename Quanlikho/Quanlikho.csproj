@@ -49,6 +49,7 @@
     <Compile Include="Controller\ChitietController.cs" />
     <Compile Include="Controller\DBController.cs" />
     <Compile Include="Controller\HHController.cs" />
+    <Compile Include="Controller\PhieunhapController.cs" />
     <Compile Include="Model\chitiet.cs" />
     <Compile Include="Model\hang.cs" />
     <Compile Include="Model\Kho.cs" />

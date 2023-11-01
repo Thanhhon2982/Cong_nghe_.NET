@@ -43,6 +43,10 @@
             this.cbb_mk = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgv_hh = new System.Windows.Forms.DataGridView();
+            this.button_save = new System.Windows.Forms.Button();
+            this.button_close = new System.Windows.Forms.Button();
+            this.txt_nguoigiao = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_hh)).BeginInit();
             this.SuspendLayout();
@@ -194,11 +198,55 @@
             this.dgv_hh.TabIndex = 0;
             this.dgv_hh.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_hh_CellEndEdit);
             // 
+            // button_save
+            // 
+            this.button_save.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_save.Location = new System.Drawing.Point(638, 618);
+            this.button_save.Name = "button_save";
+            this.button_save.Size = new System.Drawing.Size(88, 38);
+            this.button_save.TabIndex = 14;
+            this.button_save.Text = "Save";
+            this.button_save.UseVisualStyleBackColor = true;
+            this.button_save.Click += new System.EventHandler(this.button_save_Click);
+            // 
+            // button_close
+            // 
+            this.button_close.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_close.Location = new System.Drawing.Point(829, 618);
+            this.button_close.Name = "button_close";
+            this.button_close.Size = new System.Drawing.Size(88, 38);
+            this.button_close.TabIndex = 15;
+            this.button_close.Text = "Close";
+            this.button_close.UseVisualStyleBackColor = true;
+            this.button_close.Click += new System.EventHandler(this.button_close_Click);
+            // 
+            // txt_nguoigiao
+            // 
+            this.txt_nguoigiao.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_nguoigiao.Location = new System.Drawing.Point(965, 120);
+            this.txt_nguoigiao.Name = "txt_nguoigiao";
+            this.txt_nguoigiao.Size = new System.Drawing.Size(238, 30);
+            this.txt_nguoigiao.TabIndex = 16;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(776, 125);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(105, 25);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "Người giao";
+            // 
             // SRM_PNK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1348, 607);
+            this.ClientSize = new System.Drawing.Size(1288, 695);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.txt_nguoigiao);
+            this.Controls.Add(this.button_close);
+            this.Controls.Add(this.button_save);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.cbb_mk);
             this.Controls.Add(this.txt_dvphhd);
@@ -240,5 +288,9 @@
         private System.Windows.Forms.ComboBox cbb_mk;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dgv_hh;
+        private System.Windows.Forms.Button button_save;
+        private System.Windows.Forms.Button button_close;
+        private System.Windows.Forms.TextBox txt_nguoigiao;
+        private System.Windows.Forms.Label label8;
     }
 }

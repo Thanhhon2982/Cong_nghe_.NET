@@ -106,6 +106,7 @@ namespace Quanlikho.Views
                 }
 
             }
+            loadData();
 
         }
 
@@ -128,6 +129,7 @@ namespace Quanlikho.Views
                     MessageBox.Show("Lỗi !");
                 }
             }
+            loadData();
         }
 
         private void button_sua_Click(object sender, EventArgs e)
@@ -148,6 +150,7 @@ namespace Quanlikho.Views
                     MessageBox.Show("Lỗi!");
                 }
             }
+            loadData();
         }
 
         private void DGV_HangHoa_Click(object sender, EventArgs e)

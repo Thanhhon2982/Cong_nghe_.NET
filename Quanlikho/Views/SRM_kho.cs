@@ -75,72 +75,53 @@ namespace Quanlikho
                 }
                 
             }
-          
+            loadData();
+
         }
 
 
         private void button_xoa_Click(object sender, EventArgs e)
         {
-                    currentKho = new Kho(text_makho.Text, text_tenkho.Text, text_diachi.Text);
-                    DialogResult result = MessageBox.Show("Bạn có muốn xóa không?", "Xác nhận xóa", MessageBoxButtons.YesNo);
+            currentKho = new Kho(text_makho.Text, text_tenkho.Text, text_diachi.Text);
+            DialogResult result = MessageBox.Show("Bạn có muốn xóa không?", "Xác nhận xóa", MessageBoxButtons.YesNo);
 
-                    if (result == DialogResult.Yes)
+            if (result == DialogResult.Yes)
+                {
+                    bool deletedSuccessfully = controller.delete(currentKho);
+
+                    if (deletedSuccessfully)
                     {
-                        bool deletedSuccessfully = controller.delete(currentKho);
-
-                        if (deletedSuccessfully)
-                        {
-                            MessageBox.Show("Đã xóa !!");
-                            clear();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Lỗi !");
-                        }
+                        MessageBox.Show("Đã xóa !!");
+                        clear();
                     }
-                
-            
-
+                    else
+                    {
+                        MessageBox.Show("Lỗi !");
+                    }
+                }
+            loadData();
         }
 
         private void button_sua_Click(object sender, EventArgs e) // sửa dữ liệu
         {
-                    currentKho = new Kho(text_makho.Text, text_tenkho.Text, text_diachi.Text);
-                    DialogResult result = MessageBox.Show("Bạn có muốn sửa không!", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (result == DialogResult.Yes)
-                    {
-                        bool updatedSuccessfully = controller.update(currentKho);
-
-                        if (updatedSuccessfully)
-                        {
-                            MessageBox.Show("Đã sửa thành công!");
-                            clear();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Lỗi!");
-                        }
-                   }
-                     
-
-
-        }
-       
-        private void button_load_Click(object sender, EventArgs e)// load dữ liệu lên bảng
-        {
-            dsKho.Clear();
-            dsKho = controller.load();
-            DGV_Xem.Rows.Clear();
-
-            foreach (Kho k in dsKho)
-
-            {
-                String[] row = { k.getMakho(), k.getTenkho(), k.getDiachi() };
-                DGV_Xem.Rows.Add(row);
+            currentKho = new Kho(text_makho.Text, text_tenkho.Text, text_diachi.Text);
+            DialogResult result = MessageBox.Show("Bạn có muốn sửa không!", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+                {
+                bool updatedSuccessfully = controller.update(currentKho);
+                if (updatedSuccessfully)
+                {
+                    MessageBox.Show("Đã sửa thành công!");
+                    clear();
+                }
+                else
+                {
+                    MessageBox.Show("Lỗi!");
+                }
             }
-
+            loadData();
         }
-
+               
         public void clear() //Xóa trắng ở text box
         {
             text_makho.Clear();
@@ -215,13 +196,7 @@ namespace Quanlikho
         {
             loadData();
         }
-
-        private void button_test_Click(object sender, EventArgs e)
-        {
-            currentKho = new Kho(text_makho.Text,text_tenkho.Text,text_diachi.Text);
-            
-        }
-
+             
         private void DGV_Xem_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
 

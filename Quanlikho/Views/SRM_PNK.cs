@@ -15,8 +15,11 @@ namespace Quanlikho.Views
     {
         DBController khoController;//kho controller
         HHController hanghoaController;// HangHoaController
+        PhieunhapController phieunhapController;
+        ChitietController chitietController;
         List<Kho> ds_kho;//danh sach kho
         List<hang> ds_HangHoa;//danh sach hang hoa
+        phieunhap currentPN;
         public SRM_PNK()
         {
             InitializeComponent();
@@ -30,8 +33,8 @@ namespace Quanlikho.Views
             ds_HangHoa = new List<hang>();
             hanghoaController = new HHController();
             ds_HangHoa = hanghoaController.load();
-
-
+            phieunhapController = new PhieunhapController();
+            chitietController = new ChitietController();
             foreach (Kho k in ds_kho)
             {
                 cbb_mk.Items.Add(k.getMakho());
@@ -126,6 +129,30 @@ namespace Quanlikho.Views
                 int dg = int.Parse(dgv_hh.Rows[e.RowIndex].Cells[4].Value.ToString().Trim());
                 dgv_hh.Rows[e.RowIndex].Cells[5].Value = sl * dg;
 
+            }
+        }
+
+        private void button_close_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Main main = new Main();
+            main.ShowDialog();
+        }
+
+        private void button_save_Click(object sender, EventArgs e)
+        {
+            currentPN = new phieunhap(txt_sp.Text, Convert.ToDateTime(txt_ngay.Text),txt_nguoigiao.Text,txt_sohd.Text,Convert.ToDateTime(txt_ngayhd.Text),txt_dvphhd.Text,cbb_mk.Text);
+            phieunhapController.insert(currentPN);
+
+            //2. Lưu chi tiết phiếu nhập
+            for (int i = 0; i < dgv_hh.Rows.Count; i++)
+            {
+                chitiet ct = new chitiet();
+                ct.setMaphieunhap(txt_sp.Text.ToString());
+                ct.setMamathang(dgv_hh.Rows[i].Cells[0].Value.ToString());
+                ct.setSoluong(Convert.ToInt32(dgv_hh.Rows[i].Cells[3].Value.ToString()));
+                ct.setDongia(Convert.ToInt32(dgv_hh.Rows[i].Cells[4].Value.ToString()));
+                chitietController.insert(ct);
             }
         }
     }
