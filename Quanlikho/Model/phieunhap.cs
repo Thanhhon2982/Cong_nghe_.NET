@@ -26,5 +26,44 @@ namespace Quanlikho.Model
             this.donviphathanh = donviphathanh;
             this.makho = makho;
         }
+        public string getMaphieunhap() {  return maphieunhap; }
+        public DateTime getNgaynhapphieu() {  return ngaynhapphieu; }
+        public string getNguoigiao() { return nguoigiao; }
+        public string getSohoadon() {  return sohoadon; }
+        public DateTime getNgayhoadon() { return ngayhoadon; }
+        public string getDonviphathanh() { return donviphathanh; }
+        public string getMakho() {  return makho; }
+        public void setMaphieunhap(string maphieunhap)
+        {
+            this.maphieunhap = maphieunhap;
+        }
+        public void setNgaynhapphieu(DateTime ngaynhapphieu)
+        {
+            this.ngaynhapphieu = ngaynhapphieu;
+        }
+        public void setNguoigiao(string nguoigiao)
+        {
+            this.nguoigiao = nguoigiao;
+        }
+        public void setSohoadon(string sohoadon)
+        {
+            this.sohoadon = sohoadon;
+        }
+        public void setNgayhoadon(DateTime ngayhoadon)
+        {
+            this.ngayhoadon = ngayhoadon;
+        }
+        public void setDonviphathanh(string donviphathanh)
+        {
+            this.donviphathanh = donviphathanh;
+        }
+        public void setMakho(string makho)
+        {
+            this.makho = makho;
+        }
+        public string toString()
+        {
+            return maphieunhap + ngaynhapphieu + nguoigiao + sohoadon + ngayhoadon + donviphathanh + makho;
+        }
     }
 }

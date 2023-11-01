@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Quanlikho.Utils;
+using Quanlikho.Views;
+
 namespace Quanlikho
 {
     internal static class Program

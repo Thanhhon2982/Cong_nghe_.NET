@@ -1,4 +1,5 @@
 ﻿using Quanlikho.Model;
+using Quanlikho.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -6,34 +7,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Quanlikho.Utils;
+
 namespace Quanlikho.Controller
 {
-    internal class DBController
+    internal class ChitietController
     {
-        List<Kho> khoList;
-     
-        public DBController()
+        List<chitiet> chitietList;
+
+        public ChitietController()
         {
-            khoList = new List<Kho>();
-            
+            chitietList = new List<chitiet>();
+
         }
-        public List<Kho> load() {
-       
+        public List<chitiet> load()
+        {
+
             SqlConnection conn = DatabaseHelper.getConnection();
             try
             {
                 // Mở kết nối
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("select * from dskho", conn);
+                SqlCommand cmd = new SqlCommand("select * from chitietnhap", conn);
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    String makho = reader["makho"].ToString();
-                    String tenkho = reader["tenkho"].ToString();
-                    String diachi = reader["diachi"].ToString();
-                    Kho kho = new Kho(makho,tenkho,diachi);
-                    khoList.Add(kho);                 
+                    int id = Convert.ToInt32(reader["id"].ToString());
+                    String maphieunhap = reader["maphieunhap"].ToString();
+                    String mamathang = reader["mamathang"].ToString();
+                    int soluong = Convert.ToInt32(reader["soluong"].ToString());
+                    int dongia = Convert.ToInt32(reader["dongia"].ToString());
+                    chitiet chitiet = new chitiet(id, maphieunhap, mamathang, soluong, dongia);
+                    chitietList.Add(chitiet);
                 }
             }
             catch (SqlException ex)
@@ -45,30 +49,33 @@ namespace Quanlikho.Controller
                 // Đóng kết nối
                 conn.Close();
             }
-            return khoList;
+            return chitietList;
         }
-        public Kho get(string Makho) {
+        public chitiet get(string id)
+        {
 
-            foreach (Kho kho in khoList)
+            foreach (chitiet chitiet in chitietList)
             {
-                if (kho.getMakho() == Makho)
+                if (chitiet.getId().ToString() == id)
                 {
-                    return kho;
+                    return chitiet;
                 }
             }
             return null;
         }
 
-        public bool insert(Kho kho) {
+        public bool insert(chitiet chitiet)
+        {
 
             SqlConnection conn = DatabaseHelper.getConnection();
             try
             {
                 conn.Open();
-                SqlCommand command = new SqlCommand("INSERT INTO dskho  VALUES (@maKho, @tenKho, @diaChi)", conn);
-                command.Parameters.AddWithValue("@maKho", kho.getMakho());
-                command.Parameters.AddWithValue("@tenKho", kho.getTenkho());
-                command.Parameters.AddWithValue("@diaChi", kho.getDiachi());
+                SqlCommand command = new SqlCommand("INSERT INTO chitietnhap( maphieunhap, mamathang, soluong, dongia)  VALUES (@maphieunhap, @mamathang, @soluong, @dongia)", conn);
+                command.Parameters.AddWithValue("@maphieunhap", chitiet.getMaphieunhap());
+                command.Parameters.AddWithValue("@mamathang", chitiet.getMamathang());
+                command.Parameters.AddWithValue("@soluong", chitiet.getSoluong());
+                command.Parameters.AddWithValue("@dongia", chitiet.getDongia());
                 command.ExecuteNonQuery();
                 return true;
 
@@ -84,18 +91,21 @@ namespace Quanlikho.Controller
             }
             return false;
         }
-        public bool update(Kho kho) {
-            if (kho != null && !string.IsNullOrEmpty(kho.getMakho()) && !string.IsNullOrEmpty(kho.getTenkho()) && !string.IsNullOrEmpty(kho.getDiachi()))
+        public bool update(chitiet chitiet)
+        {
+            if (chitiet != null && !string.IsNullOrEmpty(chitiet.getId().ToString()) && !string.IsNullOrEmpty(chitiet.getMaphieunhap()) && !string.IsNullOrEmpty(chitiet.getMamathang()))
             {
                 // Update the kho in the database.
                 SqlConnection conn = DatabaseHelper.getConnection();
                 try
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("update dskho set tenkho = @tenKho, diachi = @diaChi where makho = @maKho", conn);
-                    cmd.Parameters.AddWithValue("@tenKho", kho.getTenkho());
-                    cmd.Parameters.AddWithValue("@diaChi", kho.getDiachi());
-                    cmd.Parameters.AddWithValue("@maKho", kho.getMakho());
+                    SqlCommand cmd = new SqlCommand("update chitietnhap set maphieunhap = @maphieunhap, mamathang = @mamathang , soluong = @soluong, dongia = @dongia where id = @id", conn);
+                    cmd.Parameters.AddWithValue("@maphieunhap", chitiet.getMaphieunhap());
+                    cmd.Parameters.AddWithValue("@mamathang", chitiet.getMamathang());
+                    cmd.Parameters.AddWithValue("@soluong", chitiet.getSoluong());
+                    cmd.Parameters.AddWithValue("@dongia", chitiet.getDongia());
+                    cmd.Parameters.AddWithValue("@id", chitiet.getId());
                     cmd.ExecuteNonQuery();
                     return true;
                 }
@@ -112,14 +122,15 @@ namespace Quanlikho.Controller
             }
             return false;
         }
-        
-        public bool delete(Kho kho) {
+
+        public bool delete(chitiet chitiet)
+        {
             SqlConnection conn = DatabaseHelper.getConnection();
             try
             {
                 conn.Open();
-                SqlCommand command = new SqlCommand("delete from dskho where makho = @maKho", conn);
-                command.Parameters.AddWithValue("@maKho", kho.getMakho());
+                SqlCommand command = new SqlCommand("delete from chitietnhap where id = @id", conn);
+                command.Parameters.AddWithValue("@id", chitiet.getId());
                 command.ExecuteNonQuery();
                 return true;
 
@@ -135,20 +146,20 @@ namespace Quanlikho.Controller
             }
             return false;
         }
-        public bool delete(String makho)
+        public bool delete(String id)
         {
-            if (!string.IsNullOrEmpty(makho))
+            if (!string.IsNullOrEmpty(id))
             {
                 // Delete the kho from the list.
-                khoList.Remove(khoList.FirstOrDefault(k => k.getMakho() == makho));
+                chitietList.Remove(chitietList.FirstOrDefault(k => k.getId().ToString() == id));
 
                 // Delete the kho from the database.
                 SqlConnection conn = DatabaseHelper.getConnection();
                 try
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("delete from dskho where makho = @makho", conn);
-                    cmd.Parameters.AddWithValue("@makho", makho);
+                    SqlCommand cmd = new SqlCommand("delete from chitietnhap where id = @id", conn);
+                    cmd.Parameters.AddWithValue("@id", id);
                     cmd.ExecuteNonQuery();
                     return true;
                 }
@@ -165,30 +176,32 @@ namespace Quanlikho.Controller
             }
             return false;
         }
-        public List<Kho> search(String keyword)
+        public List<chitiet> search(String keyword)
         {
             if (string.IsNullOrEmpty(keyword))
             {
-                return khoList;
+                return chitietList;
             }
 
             // Create a list to store the results.
-            List<Kho> results = new List<Kho>();
+            List<chitiet> results = new List<chitiet>();
 
             SqlConnection conn = DatabaseHelper.getConnection();
             try
             {
                 conn.Open();
-                SqlCommand command = new SqlCommand("SELECT * FROM dskho where makho = @makho", conn);
-                command.Parameters.AddWithValue("@makho", keyword);
+                SqlCommand command = new SqlCommand("SELECT * FROM chitietnhap where id = @id", conn);
+                command.Parameters.AddWithValue("@id", keyword);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    String makho = reader["makho"].ToString();
-                    String tenkho = reader["tenkho"].ToString();
-                    String diachi = reader["diachi"].ToString();
-                    Kho kho = new Kho(makho,tenkho,diachi);
-                    results.Add(kho);
+                    int id = Convert.ToInt32(reader["id"].ToString());
+                    String maphieunhap = reader["maphieunhap"].ToString();
+                    String mamathang = reader["mamathang"].ToString();
+                    int soluong = Convert.ToInt32(reader["soluong"].ToString());
+                    int dongia = Convert.ToInt32(reader["dongia"].ToString());
+                    chitiet chitiet = new chitiet(id, maphieunhap, mamathang, soluong, dongia);
+                    results.Add(chitiet);
                 }
             }
             catch (Exception ex)
@@ -212,9 +225,9 @@ namespace Quanlikho.Controller
                 conn.Open();
 
                 // Create a command to check if the id exists in the QLKho table
-                SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM dskho WHERE makho = @makho", conn);
+                SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM chitietnhap WHERE id = @id", conn);
                 // Add a parameter for the id
-                command.Parameters.AddWithValue("@makho", id);
+                command.Parameters.AddWithValue("@id", id);
                 // Execute the command and get the result
                 int count = (int)command.ExecuteScalar();
                 // If the count is greater than zero, the id exists
@@ -239,10 +252,10 @@ namespace Quanlikho.Controller
                 conn.Close();
             }
         }
-        public bool isExist(Kho kho)
+        public bool isExist(chitiet chitiet)
         {
             // Kiểm tra xem đối tượng Kho có hợp lệ hay không
-            if (kho == null || string.IsNullOrEmpty(kho.getMakho()))
+            if (chitiet == null || string.IsNullOrEmpty(chitiet.getId().ToString()))
             {
                 return false;
             }
@@ -254,9 +267,9 @@ namespace Quanlikho.Controller
                 // Mở kết nối
                 conn.Open();
                 // Tạo một lệnh để kiểm tra xem mã kho của đối tượng Kho có tồn tại trong bảng QLKho hay không
-                SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM dskho WHERE makho = @maKho", conn);
+                SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM chitietnhap WHERE id = @id", conn);
                 // Thêm một tham số cho mã kho
-                command.Parameters.AddWithValue("@maKho", kho.getMakho());
+                command.Parameters.AddWithValue("@id", chitiet.getId().ToString());
                 // Thực thi lệnh và lấy kết quả
                 int count = (int)command.ExecuteScalar();
                 // Nếu số lượng lớn hơn không, tức là mã kho tồn tại

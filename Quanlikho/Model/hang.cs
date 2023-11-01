@@ -22,15 +22,15 @@ namespace Quanlikho.Model
             this.tenmathang = tenmathang;
             this.donvitinh = donvitinh;
         }
-        public string getMamathang(string mamathang)
+        public string getMamathang()
         {
             return mamathang;
         }
-        public string getTenmahang(string tenmahang)
+        public string getTenmathang()
         {
             return tenmathang;
         }
-        public string getDonvitinh(string donvitinh)
+        public string getDonvitinh()
         {
             return donvitinh;
         }

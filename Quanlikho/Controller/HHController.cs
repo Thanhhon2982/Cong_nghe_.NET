@@ -1,4 +1,5 @@
 ﻿using Quanlikho.Model;
+using Quanlikho.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -6,34 +7,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Quanlikho.Utils;
+
 namespace Quanlikho.Controller
 {
-    internal class DBController
+    internal class HHController
     {
-        List<Kho> khoList;
-     
-        public DBController()
+        List<hang> hangList;
+
+        public HHController()
         {
-            khoList = new List<Kho>();
-            
+            hangList = new List<hang>();
+
         }
-        public List<Kho> load() {
-       
+        public List<hang> load()
+        {
+
             SqlConnection conn = DatabaseHelper.getConnection();
             try
             {
                 // Mở kết nối
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("select * from dskho", conn);
+                SqlCommand cmd = new SqlCommand("select * from hanghoa", conn);
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    String makho = reader["makho"].ToString();
-                    String tenkho = reader["tenkho"].ToString();
-                    String diachi = reader["diachi"].ToString();
-                    Kho kho = new Kho(makho,tenkho,diachi);
-                    khoList.Add(kho);                 
+                    String mamathang = reader["mamathang"].ToString();
+                    String tenmathang = reader["tenmathang"].ToString();
+                    String donvitinh = reader["donvitinh"].ToString();
+                    hang hang = new hang(mamathang, tenmathang, donvitinh);
+                    hangList.Add(hang);
                 }
             }
             catch (SqlException ex)
@@ -45,30 +47,32 @@ namespace Quanlikho.Controller
                 // Đóng kết nối
                 conn.Close();
             }
-            return khoList;
+            return hangList;
         }
-        public Kho get(string Makho) {
+        public hang get(string mamathang)
+        {
 
-            foreach (Kho kho in khoList)
+            foreach (hang hang in hangList)
             {
-                if (kho.getMakho() == Makho)
+                if (hang.getMamathang().Trim().Equals(mamathang.Trim()))
                 {
-                    return kho;
+                    return hang;
                 }
             }
-            return null;
+            return new hang("","","");
         }
 
-        public bool insert(Kho kho) {
+        public bool insert(hang hang)
+        {
 
             SqlConnection conn = DatabaseHelper.getConnection();
             try
             {
                 conn.Open();
-                SqlCommand command = new SqlCommand("INSERT INTO dskho  VALUES (@maKho, @tenKho, @diaChi)", conn);
-                command.Parameters.AddWithValue("@maKho", kho.getMakho());
-                command.Parameters.AddWithValue("@tenKho", kho.getTenkho());
-                command.Parameters.AddWithValue("@diaChi", kho.getDiachi());
+                SqlCommand command = new SqlCommand("INSERT INTO hanghoa  VALUES (@mamathang, @tenmathang, @donvitinh)", conn);
+                command.Parameters.AddWithValue("@mamathang", hang.getMamathang());
+                command.Parameters.AddWithValue("@tenmathang", hang.getTenmathang());
+                command.Parameters.AddWithValue("@donvitinh", hang.getDonvitinh());
                 command.ExecuteNonQuery();
                 return true;
 
@@ -84,18 +88,19 @@ namespace Quanlikho.Controller
             }
             return false;
         }
-        public bool update(Kho kho) {
-            if (kho != null && !string.IsNullOrEmpty(kho.getMakho()) && !string.IsNullOrEmpty(kho.getTenkho()) && !string.IsNullOrEmpty(kho.getDiachi()))
+        public bool update(hang hang)
+        {
+            if (hang != null && !string.IsNullOrEmpty(hang.getMamathang()) && !string.IsNullOrEmpty(hang.getTenmathang()) && !string.IsNullOrEmpty(hang.getDonvitinh()))
             {
                 // Update the kho in the database.
                 SqlConnection conn = DatabaseHelper.getConnection();
                 try
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("update dskho set tenkho = @tenKho, diachi = @diaChi where makho = @maKho", conn);
-                    cmd.Parameters.AddWithValue("@tenKho", kho.getTenkho());
-                    cmd.Parameters.AddWithValue("@diaChi", kho.getDiachi());
-                    cmd.Parameters.AddWithValue("@maKho", kho.getMakho());
+                    SqlCommand cmd = new SqlCommand("update hanghoa set tenmathang = @tenmathang, donvitinh = @donvitinh where mamathang = @mamathang", conn);
+                    cmd.Parameters.AddWithValue("@tenmathang", hang.getTenmathang());
+                    cmd.Parameters.AddWithValue("@donvitinh", hang.getDonvitinh());
+                    cmd.Parameters.AddWithValue("@mamathang", hang.getMamathang());
                     cmd.ExecuteNonQuery();
                     return true;
                 }
@@ -112,14 +117,15 @@ namespace Quanlikho.Controller
             }
             return false;
         }
-        
-        public bool delete(Kho kho) {
+
+        public bool delete(hang hang)
+        {
             SqlConnection conn = DatabaseHelper.getConnection();
             try
             {
                 conn.Open();
-                SqlCommand command = new SqlCommand("delete from dskho where makho = @maKho", conn);
-                command.Parameters.AddWithValue("@maKho", kho.getMakho());
+                SqlCommand command = new SqlCommand("delete from hanghoa where mamathang = @mamathang", conn);
+                command.Parameters.AddWithValue("@mamathang", hang.getMamathang());
                 command.ExecuteNonQuery();
                 return true;
 
@@ -135,20 +141,20 @@ namespace Quanlikho.Controller
             }
             return false;
         }
-        public bool delete(String makho)
+        public bool delete(String mamathang)
         {
-            if (!string.IsNullOrEmpty(makho))
+            if (!string.IsNullOrEmpty(mamathang))
             {
                 // Delete the kho from the list.
-                khoList.Remove(khoList.FirstOrDefault(k => k.getMakho() == makho));
+                hangList.Remove(hangList.FirstOrDefault(k => k.getMamathang() == mamathang));
 
                 // Delete the kho from the database.
                 SqlConnection conn = DatabaseHelper.getConnection();
                 try
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("delete from dskho where makho = @makho", conn);
-                    cmd.Parameters.AddWithValue("@makho", makho);
+                    SqlCommand cmd = new SqlCommand("delete from hanghoa where mamathang = @mamathang", conn);
+                    cmd.Parameters.AddWithValue("@mamathang", mamathang);
                     cmd.ExecuteNonQuery();
                     return true;
                 }
@@ -165,30 +171,30 @@ namespace Quanlikho.Controller
             }
             return false;
         }
-        public List<Kho> search(String keyword)
+        public List<hang> search(String keyword)
         {
             if (string.IsNullOrEmpty(keyword))
             {
-                return khoList;
+                return hangList;
             }
 
             // Create a list to store the results.
-            List<Kho> results = new List<Kho>();
+            List<hang> results = new List<hang>();
 
             SqlConnection conn = DatabaseHelper.getConnection();
             try
             {
-                conn.Open();
-                SqlCommand command = new SqlCommand("SELECT * FROM dskho where makho = @makho", conn);
-                command.Parameters.AddWithValue("@makho", keyword);
+                conn.Open();                
+                SqlCommand command = new SqlCommand("SELECT * FROM hanghoa where mamathang = @mamathang", conn);
+                command.Parameters.AddWithValue("@mamathang", keyword);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    String makho = reader["makho"].ToString();
-                    String tenkho = reader["tenkho"].ToString();
-                    String diachi = reader["diachi"].ToString();
-                    Kho kho = new Kho(makho,tenkho,diachi);
-                    results.Add(kho);
+                    String mamathang = reader["mamathang"].ToString();
+                    String tenmathang = reader["tenmathang"].ToString();
+                    String donvitinh = reader["donvitinh"].ToString();
+                    hang hang = new hang(mamathang, tenmathang, donvitinh);
+                    results.Add(hang);
                 }
             }
             catch (Exception ex)
@@ -212,9 +218,9 @@ namespace Quanlikho.Controller
                 conn.Open();
 
                 // Create a command to check if the id exists in the QLKho table
-                SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM dskho WHERE makho = @makho", conn);
+                SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM hanghoa WHERE mamathang = @mamathang", conn);
                 // Add a parameter for the id
-                command.Parameters.AddWithValue("@makho", id);
+                command.Parameters.AddWithValue("@mamathang", id);
                 // Execute the command and get the result
                 int count = (int)command.ExecuteScalar();
                 // If the count is greater than zero, the id exists
@@ -239,10 +245,10 @@ namespace Quanlikho.Controller
                 conn.Close();
             }
         }
-        public bool isExist(Kho kho)
+        public bool isExist(hang hang)
         {
             // Kiểm tra xem đối tượng Kho có hợp lệ hay không
-            if (kho == null || string.IsNullOrEmpty(kho.getMakho()))
+            if (hang == null || string.IsNullOrEmpty(hang.getMamathang()))
             {
                 return false;
             }
@@ -254,9 +260,9 @@ namespace Quanlikho.Controller
                 // Mở kết nối
                 conn.Open();
                 // Tạo một lệnh để kiểm tra xem mã kho của đối tượng Kho có tồn tại trong bảng QLKho hay không
-                SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM dskho WHERE makho = @maKho", conn);
+                SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM hanghoa WHERE mamathang = @mamathang", conn);
                 // Thêm một tham số cho mã kho
-                command.Parameters.AddWithValue("@maKho", kho.getMakho());
+                command.Parameters.AddWithValue("@mamathang", hang.getMamathang());
                 // Thực thi lệnh và lấy kết quả
                 int count = (int)command.ExecuteScalar();
                 // Nếu số lượng lớn hơn không, tức là mã kho tồn tại
@@ -281,5 +287,7 @@ namespace Quanlikho.Controller
             }
         }
 
+
     }
+
 }

@@ -121,7 +121,7 @@ namespace Quanlikho
                             MessageBox.Show("Lỗi!");
                         }
                    }
-                     button_load_Click(sender,e);
+                     
 
 
         }
@@ -222,5 +222,9 @@ namespace Quanlikho
             
         }
 
+        private void DGV_Xem_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

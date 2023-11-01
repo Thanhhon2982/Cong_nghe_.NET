@@ -43,7 +43,6 @@
             this.button_clear = new System.Windows.Forms.Button();
             this.DGV_Xem = new System.Windows.Forms.DataGridView();
             this.button_close = new System.Windows.Forms.Button();
-            this.button_test = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Xem)).BeginInit();
             this.SuspendLayout();
             // 
@@ -189,6 +188,7 @@
             this.DGV_Xem.RowTemplate.Height = 24;
             this.DGV_Xem.Size = new System.Drawing.Size(763, 264);
             this.DGV_Xem.TabIndex = 28;
+            this.DGV_Xem.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Xem_CellContentClick_1);
             this.DGV_Xem.Click += new System.EventHandler(this.DGV_Xem_Click);
             // 
             // button_close
@@ -203,25 +203,12 @@
             this.button_close.UseVisualStyleBackColor = false;
             this.button_close.Click += new System.EventHandler(this.button_close_Click);
             // 
-            // button_test
-            // 
-            this.button_test.BackColor = System.Drawing.Color.Cyan;
-            this.button_test.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_test.Location = new System.Drawing.Point(594, 149);
-            this.button_test.Name = "button_test";
-            this.button_test.Size = new System.Drawing.Size(121, 42);
-            this.button_test.TabIndex = 30;
-            this.button_test.Text = "Test";
-            this.button_test.UseVisualStyleBackColor = false;
-            this.button_test.Click += new System.EventHandler(this.button_test_Click);
-            // 
             // SRM_kho
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(841, 686);
-            this.Controls.Add(this.button_test);
             this.Controls.Add(this.button_close);
             this.Controls.Add(this.DGV_Xem);
             this.Controls.Add(this.button_clear);
@@ -263,7 +250,6 @@
         private System.Windows.Forms.Button button_clear;
         private System.Windows.Forms.DataGridView DGV_Xem;
         private System.Windows.Forms.Button button_close;
-        private System.Windows.Forms.Button button_test;
     }
 }
 
