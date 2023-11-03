@@ -142,10 +142,10 @@ namespace Quanlikho.Views
         private void button_save_Click(object sender, EventArgs e)
         {
             currentPN = new phieunhap(txt_sp.Text, Convert.ToDateTime(txt_ngay.Text),txt_nguoigiao.Text,txt_sohd.Text,Convert.ToDateTime(txt_ngayhd.Text),txt_dvphhd.Text,cbb_mk.Text);
-            phieunhapController.insert(currentPN);
+           phieunhapController.insert(currentPN);
 
             //2. Lưu chi tiết phiếu nhập
-            for (int i = 0; i < dgv_hh.Rows.Count; i++)
+            for (int i = 0; i < dgv_hh.Rows.Count-1; i++)
             {
                 chitiet ct = new chitiet();
                 ct.setMaphieunhap(txt_sp.Text.ToString());

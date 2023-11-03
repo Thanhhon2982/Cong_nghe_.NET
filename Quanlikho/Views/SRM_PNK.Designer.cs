@@ -170,7 +170,7 @@
             // 
             this.cbb_mk.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbb_mk.FormattingEnabled = true;
-            this.cbb_mk.Location = new System.Drawing.Point(166, 273);
+            this.cbb_mk.Location = new System.Drawing.Point(166, 268);
             this.cbb_mk.Name = "cbb_mk";
             this.cbb_mk.Size = new System.Drawing.Size(213, 30);
             this.cbb_mk.TabIndex = 12;
