@@ -48,7 +48,7 @@
             // 
             // button_sua
             // 
-            this.button_sua.BackColor = System.Drawing.Color.Cyan;
+            this.button_sua.BackColor = System.Drawing.Color.White;
             this.button_sua.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_sua.Location = new System.Drawing.Point(309, 593);
             this.button_sua.Name = "button_sua";
@@ -60,7 +60,7 @@
             // 
             // button_xoa
             // 
-            this.button_xoa.BackColor = System.Drawing.Color.Cyan;
+            this.button_xoa.BackColor = System.Drawing.Color.White;
             this.button_xoa.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_xoa.Location = new System.Drawing.Point(170, 593);
             this.button_xoa.Name = "button_xoa";
@@ -98,7 +98,7 @@
             // 
             // button_them
             // 
-            this.button_them.BackColor = System.Drawing.Color.Cyan;
+            this.button_them.BackColor = System.Drawing.Color.White;
             this.button_them.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_them.Location = new System.Drawing.Point(29, 593);
             this.button_them.Name = "button_them";
@@ -149,7 +149,7 @@
             // 
             // button_timkiem
             // 
-            this.button_timkiem.BackColor = System.Drawing.Color.Cyan;
+            this.button_timkiem.BackColor = System.Drawing.Color.White;
             this.button_timkiem.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_timkiem.Location = new System.Drawing.Point(594, 241);
             this.button_timkiem.Name = "button_timkiem";
@@ -169,7 +169,7 @@
             // 
             // button_clear
             // 
-            this.button_clear.BackColor = System.Drawing.Color.Cyan;
+            this.button_clear.BackColor = System.Drawing.Color.White;
             this.button_clear.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_clear.Location = new System.Drawing.Point(451, 593);
             this.button_clear.Name = "button_clear";
@@ -193,7 +193,7 @@
             // 
             // button_close
             // 
-            this.button_close.BackColor = System.Drawing.Color.Cyan;
+            this.button_close.BackColor = System.Drawing.Color.White;
             this.button_close.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_close.Location = new System.Drawing.Point(594, 593);
             this.button_close.Name = "button_close";
@@ -207,8 +207,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(841, 686);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(855, 686);
             this.Controls.Add(this.button_close);
             this.Controls.Add(this.DGV_Xem);
             this.Controls.Add(this.button_clear);
@@ -227,6 +227,7 @@
             this.Name = "SRM_kho";
             this.Text = "SRM_kho";
             this.Load += new System.EventHandler(this.SRM_kho_Load);
+            this.Click += new System.EventHandler(this.SRM_kho_Click);
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Xem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

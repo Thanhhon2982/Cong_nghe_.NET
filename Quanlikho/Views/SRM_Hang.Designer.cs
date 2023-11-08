@@ -41,6 +41,8 @@
             this.button_xoa = new System.Windows.Forms.Button();
             this.button_sua = new System.Windows.Forms.Button();
             this.txt_tim = new System.Windows.Forms.TextBox();
+            this.button_clear = new System.Windows.Forms.Button();
+            this.button_close = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_HangHoa)).BeginInit();
             this.SuspendLayout();
             // 
@@ -171,11 +173,35 @@
             this.txt_tim.Size = new System.Drawing.Size(308, 30);
             this.txt_tim.TabIndex = 12;
             // 
+            // button_clear
+            // 
+            this.button_clear.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_clear.Location = new System.Drawing.Point(533, 563);
+            this.button_clear.Name = "button_clear";
+            this.button_clear.Size = new System.Drawing.Size(113, 38);
+            this.button_clear.TabIndex = 13;
+            this.button_clear.Text = "Clear";
+            this.button_clear.UseVisualStyleBackColor = true;
+            this.button_clear.Click += new System.EventHandler(this.button_clear_Click);
+            // 
+            // button_close
+            // 
+            this.button_close.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_close.Location = new System.Drawing.Point(684, 563);
+            this.button_close.Name = "button_close";
+            this.button_close.Size = new System.Drawing.Size(113, 38);
+            this.button_close.TabIndex = 14;
+            this.button_close.Text = "Thoát";
+            this.button_close.UseVisualStyleBackColor = true;
+            this.button_close.Click += new System.EventHandler(this.button_close_Click);
+            // 
             // SRM_Hang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(826, 674);
+            this.Controls.Add(this.button_close);
+            this.Controls.Add(this.button_clear);
             this.Controls.Add(this.txt_tim);
             this.Controls.Add(this.button_sua);
             this.Controls.Add(this.button_xoa);
@@ -192,6 +218,7 @@
             this.Name = "SRM_Hang";
             this.Text = "SRM_Hang";
             this.Load += new System.EventHandler(this.SRM_Hang_Load);
+            this.Click += new System.EventHandler(this.SRM_Hang_Click);
             ((System.ComponentModel.ISupportInitialize)(this.DGV_HangHoa)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -213,5 +240,7 @@
         private System.Windows.Forms.Button button_xoa;
         private System.Windows.Forms.Button button_sua;
         private System.Windows.Forms.TextBox txt_tim;
+        private System.Windows.Forms.Button button_clear;
+        private System.Windows.Forms.Button button_close;
     }
 }

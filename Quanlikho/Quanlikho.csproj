@@ -86,6 +86,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\SRM_Phieunhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SRM_Phieunhap.Designer.cs">
+      <DependentUpon>SRM_Phieunhap.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\SRM_PNK.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,6 +114,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SRM_Phieunhap.resx">
+      <DependentUpon>SRM_Phieunhap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\SRM_PNK.resx">
       <DependentUpon>SRM_PNK.cs</DependentUpon>

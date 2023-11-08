@@ -75,8 +75,6 @@ namespace Quanlikho
                 }
                 
             }
-            loadData();
-
         }
 
 
@@ -99,7 +97,6 @@ namespace Quanlikho
                         MessageBox.Show("Lỗi !");
                     }
                 }
-            loadData();
         }
 
         private void button_sua_Click(object sender, EventArgs e) // sửa dữ liệu
@@ -164,13 +161,14 @@ namespace Quanlikho
         private void button_close_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Bạn có muốn thoát không?", "Xác nhận thoát", MessageBoxButtons.YesNo);
-            if (result == DialogResult.Yes) 
+            if (result == DialogResult.Yes)
             {
                 this.Hide();
                 Main main = new Main();
                 main.ShowDialog();
+                this.Close();
             }
-            
+
         }
 
         private void DGV_Xem_Click(object sender, EventArgs e)
@@ -200,6 +198,11 @@ namespace Quanlikho
         private void DGV_Xem_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void SRM_kho_Click(object sender, EventArgs e)
+        {
+            loadData();
         }
     }
 }

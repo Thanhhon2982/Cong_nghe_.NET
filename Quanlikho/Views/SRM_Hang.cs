@@ -106,8 +106,6 @@ namespace Quanlikho.Views
                 }
 
             }
-            loadData();
-
         }
 
         private void button_xoa_Click(object sender, EventArgs e)
@@ -129,7 +127,6 @@ namespace Quanlikho.Views
                     MessageBox.Show("Lỗi !");
                 }
             }
-            loadData();
         }
 
         private void button_sua_Click(object sender, EventArgs e)
@@ -150,7 +147,6 @@ namespace Quanlikho.Views
                     MessageBox.Show("Lỗi!");
                 }
             }
-            loadData();
         }
 
         private void DGV_HangHoa_Click(object sender, EventArgs e)
@@ -169,6 +165,31 @@ namespace Quanlikho.Views
             txt_mahang.Text = row.Cells[0].Value.ToString();
             txt_tenhang.Text = row.Cells[1].Value.ToString();
             txt_dvt.Text = row.Cells[2].Value.ToString();
+        }
+
+        private void button_clear_Click(object sender, EventArgs e)
+        {
+            txt_dvt.Clear();
+            txt_mahang.Clear();
+            txt_tenhang.Clear();
+            txt_tim.Clear();
+        }
+
+        private void button_close_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn có muốn thoát không?", "Xác nhận thoát", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                this.Hide();
+                Main main = new Main();
+                main.ShowDialog();
+                this.Close();
+            }
+        }
+
+        private void SRM_Hang_Click(object sender, EventArgs e)
+        {
+            loadData(); 
         }
     }
 }

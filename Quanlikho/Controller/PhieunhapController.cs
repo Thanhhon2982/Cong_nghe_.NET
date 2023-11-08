@@ -27,7 +27,7 @@ namespace Quanlikho.Controller
             {
                 // Mở kết nối
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("select * from phieunhapnhap", conn);
+                SqlCommand cmd = new SqlCommand("select * from phieunhap", conn);
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -105,7 +105,7 @@ namespace Quanlikho.Controller
                 try
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("update phieunhapnhap set  ngaynhapphieu = @ngaynhapphieu, nguoigiao = @nguoigiao ,sohoadon = @sohoadon ,ngayhoadon=@ngayhoadon, donviphathanh = @donviphathanh ,makho = @makho where maphieunhap = @maphieunhap ", conn);
+                    SqlCommand cmd = new SqlCommand("update phieunhap set  ngaynhapphieu = @ngaynhapphieu, nguoigiao = @nguoigiao ,sohoadon = @sohoadon ,ngayhoadon=@ngayhoadon, donviphathanh = @donviphathanh ,makho = @makho where maphieunhap = @maphieunhap ", conn);
                     cmd.Parameters.AddWithValue("@ngaynhapphieu", phieunhap.getNgaynhapphieu());
                     cmd.Parameters.AddWithValue("@nguoigiao", phieunhap.getNguoigiao());
                     cmd.Parameters.AddWithValue("@sohoadon", phieunhap.getSohoadon());
@@ -136,7 +136,7 @@ namespace Quanlikho.Controller
             try
             {
                 conn.Open();
-                SqlCommand command = new SqlCommand("delete from phieunhapnhap where maphieunhap = @maphieunhap", conn);
+                SqlCommand command = new SqlCommand("delete from phieunhap where maphieunhap = @maphieunhap", conn);
                 command.Parameters.AddWithValue("@maphieunhap", phieunhap.getMaphieunhap());
                 command.ExecuteNonQuery();
                 return true;
@@ -165,7 +165,7 @@ namespace Quanlikho.Controller
                 try
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("delete from phieunhapnhap where maphieunhap = @maphieunhap", conn);
+                    SqlCommand cmd = new SqlCommand("delete from phieunhap where maphieunhap = @maphieunhap", conn);
                     cmd.Parameters.AddWithValue("@maphieunhap", id);
                     cmd.ExecuteNonQuery();
                     return true;
@@ -197,7 +197,7 @@ namespace Quanlikho.Controller
             try
             {
                 conn.Open();
-                SqlCommand command = new SqlCommand("SELECT * FROM phieunhapnhap where maphieunhap = @maphieunhap", conn);
+                SqlCommand command = new SqlCommand("SELECT * FROM phieunhap where maphieunhap = @maphieunhap", conn);
                 command.Parameters.AddWithValue("@maphieunhap", keyword);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
@@ -234,7 +234,7 @@ namespace Quanlikho.Controller
                 conn.Open();
 
                 // Create a command to check if the id exists in the QLKho table
-                SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM phieunhapnhap WHERE maphieunhap = @maphieunhap", conn);
+                SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM phieunhap WHERE maphieunhap = @maphieunhap", conn);
                 // Add a parameter for the id
                 command.Parameters.AddWithValue("@maphieunhap", id);
                 // Execute the command and get the result

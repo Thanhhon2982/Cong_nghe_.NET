@@ -85,7 +85,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(58, 273);
+            this.label4.Location = new System.Drawing.Point(58, 255);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 25);
             this.label4.TabIndex = 3;
@@ -128,7 +128,6 @@
             this.txt_sp.Name = "txt_sp";
             this.txt_sp.Size = new System.Drawing.Size(213, 30);
             this.txt_sp.TabIndex = 6;
-            this.txt_sp.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // txt_sohd
             // 
@@ -137,7 +136,6 @@
             this.txt_sohd.Name = "txt_sohd";
             this.txt_sohd.Size = new System.Drawing.Size(213, 30);
             this.txt_sohd.TabIndex = 7;
-            this.txt_sohd.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // txt_ngay
             // 
@@ -146,7 +144,6 @@
             this.txt_ngay.Name = "txt_ngay";
             this.txt_ngay.Size = new System.Drawing.Size(238, 30);
             this.txt_ngay.TabIndex = 9;
-            this.txt_ngay.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // txt_ngayhd
             // 
@@ -155,7 +152,6 @@
             this.txt_ngayhd.Name = "txt_ngayhd";
             this.txt_ngayhd.Size = new System.Drawing.Size(238, 30);
             this.txt_ngayhd.TabIndex = 10;
-            this.txt_ngayhd.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // txt_dvphhd
             // 
@@ -164,23 +160,21 @@
             this.txt_dvphhd.Name = "txt_dvphhd";
             this.txt_dvphhd.Size = new System.Drawing.Size(238, 30);
             this.txt_dvphhd.TabIndex = 11;
-            this.txt_dvphhd.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
             // 
             // cbb_mk
             // 
             this.cbb_mk.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbb_mk.FormattingEnabled = true;
-            this.cbb_mk.Location = new System.Drawing.Point(166, 268);
+            this.cbb_mk.Location = new System.Drawing.Point(166, 250);
             this.cbb_mk.Name = "cbb_mk";
             this.cbb_mk.Size = new System.Drawing.Size(213, 30);
             this.cbb_mk.TabIndex = 12;
-            this.cbb_mk.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dgv_hh);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(63, 331);
+            this.groupBox1.Location = new System.Drawing.Point(63, 302);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1219, 272);
             this.groupBox1.TabIndex = 13;
@@ -201,7 +195,7 @@
             // button_save
             // 
             this.button_save.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_save.Location = new System.Drawing.Point(638, 618);
+            this.button_save.Location = new System.Drawing.Point(638, 607);
             this.button_save.Name = "button_save";
             this.button_save.Size = new System.Drawing.Size(88, 38);
             this.button_save.TabIndex = 14;
@@ -212,7 +206,7 @@
             // button_close
             // 
             this.button_close.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_close.Location = new System.Drawing.Point(829, 618);
+            this.button_close.Location = new System.Drawing.Point(829, 607);
             this.button_close.Name = "button_close";
             this.button_close.Size = new System.Drawing.Size(88, 38);
             this.button_close.TabIndex = 15;

@@ -82,35 +82,6 @@ namespace Quanlikho.Views
 
         }
 
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void dgv_hh_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
@@ -134,16 +105,28 @@ namespace Quanlikho.Views
 
         private void button_close_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Main main = new Main();
-            main.ShowDialog();
+            DialogResult result = MessageBox.Show("Bạn có muốn thoát không?", "Xác nhận thoát", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                this.Hide();
+                Main main = new Main();
+                main.ShowDialog();
+                this.Close();
+            }
         }
 
         private void button_save_Click(object sender, EventArgs e)
         {
             currentPN = new phieunhap(txt_sp.Text, Convert.ToDateTime(txt_ngay.Text),txt_nguoigiao.Text,txt_sohd.Text,Convert.ToDateTime(txt_ngayhd.Text),txt_dvphhd.Text,cbb_mk.Text);
-           phieunhapController.insert(currentPN);
-
+            bool check = phieunhapController.insert(currentPN);
+            if (check)
+            {
+                MessageBox.Show("Đã lưu thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
+            }
+            else
+            {
+                MessageBox.Show("Lỗi !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             //2. Lưu chi tiết phiếu nhập
             for (int i = 0; i < dgv_hh.Rows.Count-1; i++)
             {
@@ -155,5 +138,6 @@ namespace Quanlikho.Views
                 chitietController.insert(ct);
             }
         }
+
     }
 }
